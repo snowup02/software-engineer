@@ -1,0 +1,135 @@
+<!DOCTYPE html> 
+
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Software Engineer</title> 
+    <!-- Google Fonts for better typography --> 
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+
+</head> 
+ 
+<body> 
+    <header>
+        <div> 
+        <img src="images/Main Scene2.gif" class="img-fl">
+        </div>
+        <div> 
+            
+         </div>
+    </header>
+
+    <!-- About Me Button positioned in the top left corner -->
+    <div class="about-me-btn-container">
+        <button id="aboutMeButton">About Me!</button>
+        <br></br>
+        <!-- Dark Mode Toggle Button (Placed below About Me Button) -->
+        <button id="darkModeToggle">
+            ☾
+        </button>
+    </div>
+
+
+<!-- About Me Modal -->
+<div id="aboutMeModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2><strong>About Me:</strong></h2>
+        <h3>Hi there, My name is Edric! I live in the Philippines. 
+            I'm a freelancer/student, studying a program in Computer Engineering. 
+            I'm literate in several computer languages such as C++, 
+            C language, Python, and Full Stack Development, 
+            and I'm still expanding my skills. My hobbies include 
+            playing online games, reading books, watching different genres
+             of movies, and a cyclist.
+        </h3>
+    </div>
+</div>
+<div class="top-right">
+    <a href="https://www.facebook.com/profile.php?id=100010316700446" target="_blank">Facebook</a>
+    <a href="mailto:mambaedric@gmail.com">Email</a>
+    <a href="https://www.upwork.com/freelancers/~0128ab857096f2eeab" target="_blank">upwork</a>
+    <a href="https://discord.com/channels/@me/1147124336310882406" target="_blank">Discord</a>
+</div>
+<h1>Hi! I'm a Software Engineer</h1>
+<button id="helpButton"><em>How can I help you?</em></button>
+
+<!-- Options that will appear when the subtitle button is clicked -->
+<div class="options" id="optionsContainer">
+    <button class="option-btn" onclick="displayChoice('C++')">C++</button>
+    <button class="option-btn" onclick="displayChoice('C')">C</button>
+    <button class="option-btn" onclick="displayChoice('Python')">Python</button>
+    <button class="option-btn" onclick="displayChoice('Web Development')">Web Development</button>
+</div>
+
+<!-- Message will appear once an option is selected -->
+<div class="message" id="messageContainer"></div>
+
+<script>
+    // About Me Modal Script
+    const aboutMeButton = document.getElementById('aboutMeButton');
+    const aboutMeModal = document.getElementById('aboutMeModal');
+    const closeModal = document.getElementsByClassName('close')[0];
+
+    aboutMeButton.addEventListener('click', () => {
+        aboutMeModal.style.display = "block";  // Show modal
+    });
+
+    closeModal.addEventListener('click', () => {
+        aboutMeModal.style.display = "none";  // Close modal when 'x' is clicked
+    });
+
+    // Close the modal if clicked outside the modal content
+    window.onclick = function (event) {
+        if (event.target === aboutMeModal) {
+            aboutMeModal.style.display = "none";
+        }
+    };
+
+    // Dark Mode / Light Mode Toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+
+    // Check if dark mode is already set in localStorage
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☼';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        // Toggle dark mode class
+        document.body.classList.toggle('dark-mode');
+
+        // Change button text based on the current mode
+        if (document.body.classList.contains('dark-mode')) {
+            darkModeToggle.textContent = '☼';
+            localStorage.setItem('theme', 'dark');  // Store the theme in localStorage
+        } else {
+            darkModeToggle.textContent = '☾';
+            localStorage.setItem('theme', 'light');  // Store the theme in localStorage
+        }
+    });
+
+    // Toggle the visibility of the options with animation and clear the message when toggled off
+    const helpButton = document.getElementById('helpButton');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const messageContainer = document.getElementById('messageContainer');
+
+    helpButton.addEventListener('click', () => {
+        // Check if the options are visible
+        if (optionsContainer.classList.contains('show')) {
+            // If options are visible, clear the message
+            messageContainer.innerHTML = '';
+        }
+        optionsContainer.classList.toggle('show');
+    });
+
+    // Display the selected choice with a dynamic message
+    function displayChoice(choice) {
+        messageContainer.innerHTML = `If you want to know more about <strong>${choice}</strong>! Message me on one of my contacts above!`;
+    }
+</script>
+</body>
+
+</html>
